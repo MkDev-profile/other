@@ -1,0 +1,139 @@
+
+
+
+-- example github template:
+echo "# example-microservice" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/UserProfile/example-microservice.git
+git push -u origin main
+
+
+-- Initialize new empty repository in current directory
+git init	
+
+-- Download full copy (all history) of remote repository
+git clone <url>	
+
+-- Set username and email for all repositories on local computer
+git config --global user.name "Your Name"	
+git config --global user.email "your.email@example.com"	
+
+example config (~/.gitconfig):
+[user] 
+    name = testusr 
+    email = testusr@mail.com
+
+-- List configuration settings
+git config --list
+
+-- Download latest history from remote repository
+git fetch
+
+-- Push commits from local branch to tracked remote branch.
+git push	
+
+-- Set url of remote repository
+git remote add origin <url>	
+
+-- First Push of local branch to remote server
+git push -u origin <branch-name>
+
+-- List all local branches (current branch is highlighted)
+git branch --list -a
+
+-- Create new branch based on current commit
+git branch <branch-name>	
+
+-- Rename branch
+git branch -m <ChangedName>
+
+-- Show name of current branch
+git branch --show-current
+
+-- Switch to existing branch
+git switch <branch-name>
+
+-- Create new branch and switch to it immediately
+git switch -c <new-branch-name>
+
+-- Delete branch
+git branch -d <branch-name>
+
+-- Undo last commit but keep all changes as staged
+git reset --soft HEAD~1	
+
+-- Safe-Undo commit (creates new commit that reverses changes of commit)
+git revert <commit-id>	
+
+-- List remote connections
+git remote -v	
+
+-- Pull = git fetch + git merge.
+git pull
+
+-- Merge
+# On main branch
+git merge feature-branch
+
+p.s. commits merged according to time of commit
+(after merging: commits hashes not changed).
+p.s. merge is preffered for Shared branches (for example: "main" branch)
+
+example:
+- "main" branch commits: 
+A   B   C   M
+- "feature" branch commits: 
+  D   E
+- result after merge:
+A D B E C   M
+
+-- Rebase
+# On feature branch
+git rebase main
+
+p.s. commits of main inserted to start (before feature commits) (not depending of time of commits)
+(after rebasing: commits hashes are changed)
+
+example:
+- "main" branch commits: 
+A   B   C   M
+- "feature" branch commits: 
+  D   E
+- result after merge:
+A   B   C   M D E
+
+
+________________________________________________________
+
+
+Troubleshooting:
+
+-- switch to another git(github)-account on Windows:
+Go to Control Panel → Credential Manager → Windows Credentials
+// Find Git credentials and remove/update them
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

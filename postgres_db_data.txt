@@ -1,0 +1,70 @@
+
+
+
+-- Insert departments
+INSERT INTO departments (department_name, budget) VALUES
+('Engineering', 1000000.00),
+('Marketing', 500000.00),
+('Sales', 750000.00),
+('HR', 300000.00);
+
+-- Insert employees
+INSERT INTO employees (first_name, last_name, email, salary, department_id, hire_date) VALUES
+('John', 'Doe', 'john.doe@company.com', 75000.00, 1, '2020-01-15'),
+('Jane', 'Smith', 'jane.smith@company.com', 80000.00, 1, '2019-03-20'),
+('Bob', 'Johnson', 'bob.johnson@company.com', 65000.00, 2, '2021-06-10'),
+('Alice', 'Brown', 'alice.brown@company.com', 90000.00, 3, '2018-11-05'),
+('Charlie', 'Wilson', 'charlie.wilson@company.com', 70000.00, 1, '2022-02-28');
+
+-- Insert tasks
+INSERT INTO tasks (id, task_description, employee_id) VALUES 
+(1, 'Design database schema', 1),
+(2, 'Create marketing campaign', 2),
+(3, 'Fix login bug', 1),
+(4, 'Update documentation', NULL),
+(5, 'Recruit new developers', 3);
+
+-- Insert projects
+INSERT INTO projects (project_name, description, priority, budget, start_date, end_date) VALUES
+('Website Redesign', 'Complete overhaul of company website', 'high', 50000.00, '2023-01-01', '2023-06-30'),
+('Mobile App', 'Development of new mobile application', 'critical', 150000.00, '2023-02-01', NULL),
+('Marketing Campaign', 'Q2 marketing campaign', 'medium', 25000.00, '2023-03-01', '2023-05-31');
+
+-- Assign employees to projects
+INSERT INTO employee_projects (employee_id, project_id, role, hours_worked) VALUES
+(1, 1, 'Tech Lead', 40.5),
+(2, 1, 'Developer', 35.0),
+(1, 2, 'Architect', 25.0),
+(3, 3, 'Campaign Manager', 30.0),
+(4, 3, 'Sales Coordinator', 20.0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,79 @@
+
+-- Extract archive
+$ tar -xvf ~/Downloads/postgresql-17.4.tar.gz -C ~/Downloads
+
+-- Install dependencies
+sudo apt update 
+sudo apt upgrade 
+sudo apt install libicu-dev 
+sudo apt install pkg-config - установить пакет bison 
+sudo apt install bison - установить пакет flex 
+sudo apt install flex - установить пакет readline 
+sudo apt install libreadline-dev - установить пакет zlib 
+sudo apt install zlib1g-dev 
+
+// Configure
+$ cd ~/Downloads/postgresql-17.4 
+$ ./configure 
+// Compile: 
+$ make 
+// login from root-user: 
+$ sudo su 
+// install: 
+$ make install 
+// create database-owner user (in ubuntu): 
+$ adduser postgres  
+// create directory for databases-data: 
+$ mkdir -p /usr/local/pgsql/data 
+// set owner-user for data-directory:  
+$ chown postgres /usr/local/pgsql/data
+// login(in ubuntu) as database-owner user: 
+$ su - postgres 
+$ cd ~ 
+// p.s. /home/postgres/ 
+ 
+// Create database-cluster in data-directory: 
+$ /usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data 
+// Start database-server-instance for database-cluster: 
+$ /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start 
+
+// check create db "test": 
+$ /usr/local/pgsql/bin/createdb test 
+ 
+// check connect to db "test": 
+$ /usr/local/pgsql/bin/psql test 
+ 
+p.s. to check status: 
+$ /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data status 
+ 
+p.s. чтобы вызывать "psql" и другие бинарники по названию 
+нужно добавить путь "/usr/local/pgsql/bin" в envVar "PATH" 
+example: 
+$ su - postgres 
+postgres@some-pc:~$ nano ~/.bashrc 
+write(append) в file: 
+export PATH="$PATH:/usr/local/pgsql/bin" 
+then: save and close (Ctrl+O, Ctrl+X) 
+then: open New terminal-tab: 
+// check:  
+$ su - postgres 
+connect to db "postgres" from ubuntu-user "postgres" 
+postgres@some-pc:~$ psql postgres 
+// p.s. OK 
+// p.s. output: 
+postgres=# 
+p.s. or set environment variable for all users: 
+example: 
+$ sudo nano /etc/environment 
+// append to envVar "PATH":  
+:/usr/local/pgsql/bin 
+then: restart computer 
+then: connect to db "postgres" with login "postgres" from ubuntu-user "testusr" 
+testusr@some-pc:~$ psql -d postgres -U postgres 
+p.s. output: 
+postgres=# 
+
+
+
+
+

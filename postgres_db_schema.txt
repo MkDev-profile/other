@@ -1,0 +1,76 @@
+
+
+-- Create enum type
+CREATE TYPE employee_status AS ENUM ('active', 'inactive', 'on_leave');
+CREATE TYPE project_priority AS ENUM ('low', 'medium', 'high', 'critical');
+
+-- Create tables
+CREATE TABLE departments (
+    department_id SERIAL PRIMARY KEY,
+    department_name VARCHAR(100) UNIQUE NOT NULL,
+    budget DECIMAL(15,2) CHECK (budget >= 0),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    salary DECIMAL(10,2) CHECK (salary >= 0),
+    status employee_status DEFAULT 'active',
+    department_id INTEGER REFERENCES departments(department_id),
+    hire_date DATE NOT NULL,
+    manager_id INTEGER REFERENCES employees(employee_id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE projects (
+    project_id SERIAL PRIMARY KEY,
+    project_name VARCHAR(200) NOT NULL,
+    description TEXT,
+    priority project_priority DEFAULT 'medium',
+    budget DECIMAL(15,2),
+    start_date DATE,
+    end_date DATE,
+    CHECK (end_date IS NULL OR end_date > start_date)
+);
+
+CREATE TABLE employee_projects (
+    employee_id INTEGER REFERENCES employees(employee_id) ON DELETE CASCADE,
+    project_id INTEGER REFERENCES projects(project_id) ON DELETE CASCADE,
+    role VARCHAR(50),
+    assignment_date DATE DEFAULT CURRENT_DATE,
+    hours_worked DECIMAL(5,2) DEFAULT 0,
+    PRIMARY KEY (employee_id, project_id)
+);
+
+CREATE TABLE audit_log (
+    log_id SERIAL PRIMARY KEY,
+    table_name VARCHAR(50),
+    operation VARCHAR(10),
+    old_data JSONB,
+    new_data JSONB,
+    changed_by VARCHAR(100),
+    changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+    task_description VARCHAR(20) NOT NULL,
+    employee_id INT REFERENCES employees(employee_id)
+);
+
+-- Create indexes
+CREATE INDEX idx_employees_department ON employees(department_id);
+CREATE INDEX idx_employees_name ON employees(last_name, first_name);
+CREATE INDEX idx_projects_priority ON projects(priority);
+CREATE UNIQUE INDEX idx_employee_projects_unique ON employee_projects(employee_id, project_id);
+
+
+
+
+
+
+
+

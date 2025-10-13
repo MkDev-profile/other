@@ -1,0 +1,90 @@
+
+
+-- Connect to database
+psql -h hostname -p port -U username -d database_name
+
+-- example:
+psql -h localhost -p 5432       # Connect with host and port
+
+-- example:
+connect to db "db1" with username "postgres" from ubuntu-user "testusr":
+```
+testusr@some-pc:~$ psql -d db1 -U postgres 
+p.s. output: 
+db1=#
+```
+
+-- List all databases
+\l
+\list
+
+-- Connect to database
+\c database_name
+\connect database_name
+
+-- List all tables
+\dt
+\dt+  -- with additional info
+
+-- List all schemas
+\dn
+
+-- Describe table structure
+\d table_name
+\d+ table_name  -- more detailed
+
+-- Show command history
+\s
+
+-- Quit psql
+\q
+
+-- Show current database
+SELECT current_database();
+
+-- Show current user
+SELECT current_user;
+
+-- Show server version
+SELECT version();
+
+-- Show all settings
+SHOW ALL;
+
+-- Execute SQL file (inside psql)
+\i filename.sql
+
+-- Execute SQL file (using psql)
+psql -f file.sql
+
+-- Execute command from file
+\i /path/to/file.sql
+
+-- Read and execute commands from file
+\ir filename.sql  -- relative path
+
+-- Output results to file
+\o filename.txt
+SELECT * FROM table_name;
+\o  -- turn off output
+
+-- Copy data to/from file
+COPY table_name TO '/path/to/file.csv' WITH CSV HEADER;
+COPY table_name FROM '/path/to/file.csv' WITH CSV HEADER;
+
+-- Show locks
+SELECT * FROM pg_locks;
+
+-- Show active connections
+SELECT * FROM pg_stat_activity;
+
+-- Execute SQL Queries (comma-separated)
+psql -c "SELECT NOW();"
+
+
+
+
+
+
+
+

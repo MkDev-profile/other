@@ -1,0 +1,71 @@
+
+________________________________________________________
+
+-- Test connection to network host
+ping google.com
+
+_________________________________________________________
+
+-- File Descriptor (fd)
+
+is integer value(4/5/6/etc) for referencing(like pointer) to concrete real os-resource(file/socket/pipe/etc) from(из) concrete os-process(app,etc).
+
+for what:
+for using same resource(file/socket/etc) by many processes(apps/etc)
+
+unique связка:
+{process, fd}
+p.s. concrete process creates (for itself usage) concrete fd to concrete real resource
+
+example:
+{app_1; fd=4 to file_1; fd=5 to file_2}
+{app_2; fd=4 to file_2;}
+
+example on bash:
+
+# create fd=4 to file_a.txt
+exec 4<file_a.txt  
+# see the file descriptor table
+ls -la /proc/$$/fd/
+# example output:
+lrwx------ 1 user user 64 Dec 10 10:40 /proc/1234/fd/4 -> /home/user/file_a.txt
+# read from file_a.txt via fd 4
+cat <&4  
+# write to file_a.txt via fd 4
+echo "some text" >&4
+
+
+
+
+_____________________________________________________________
+
+
+-- INode
+
+
+
+______________________________________________________________
+
+
+-- Multiplexing
+(p.s. sharing resource between multiple clients)
+
+1. Time-Division Multiplexing (TDM)
+// example:
+The OS scheduler gives each process a tiny slice of time on the CPU (e.g., 10-100ms). It rapidly switches between them, creating the illusion that many programs are running at the same time (concurrency).
+
+2. Frequency-Division / Space-Division Multiplexing (FDM/SDM)
+// example:
+Each process is given its own private virtual address space (e.g., 4GB on a 32-bit system). The OS maps these virtual addresses to the actual, much smaller, physical RAM. This gives each process the illusion that it has a large, contiguous block of memory all to itself.
+
+
+___________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+

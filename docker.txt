@@ -1,0 +1,99 @@
+
+
+-- Run containers:
+
+docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+docker run -d --name mycontainer nginx          # Run in detached mode
+docker run -it ubuntu /bin/bash                 # Interactive terminal
+docker run -p 8080:80 nginx                     # Map port
+docker run -v /host/path:/container/path nginx  # Map volume
+docker run nginx -e VAR=value                   # Set environment variable
+
+-- List containers:
+
+docker ps                 # Running containers
+docker ps -a              # All containers (including stopped)
+docker ps -l              # Last created container
+
+-- Start/stop containers:
+
+docker start container_name
+docker stop container_name
+docker restart container_name
+docker pause container_name
+docker unpause container_name
+
+-- Remove containers:
+
+docker rm container_name
+docker rm -f container_name  # Force remove running container
+docker container prune       # Remove all stopped containers
+
+-- other commands for container:
+
+docker exec -it container_name /bin/bash  # Execute command in running container
+docker logs container_name                # View container logs
+docker logs -f container_name             # Follow logs
+docker inspect container_name             # Detailed container info
+docker stats                              # Live container statistics
+
+-- List images:
+
+docker images
+docker image ls
+
+-- Pull/push images:
+
+docker pull image_name:tag
+docker push username/image_name:tag
+
+-- Remove images:
+
+docker rmi image_id
+docker image prune        # Remove unused images
+docker image prune -a     # Remove all unused images
+
+-- Build images:
+
+docker build -t image_name .
+docker build -t image_name -f Dockerfile.dev .
+
+-- Network commands:
+
+docker network ls                 # List networks
+docker network create mynetwork   # Create network
+docker network inspect mynetwork  # Network details
+docker network rm mynetwork       # Remove network
+
+-- Volume commands:
+
+docker volume ls                  # List volumes
+docker volume create myvolume     # Create volume
+docker volume inspect myvolume    # Volume details
+docker volume rm myvolume         # Remove volume
+docker volume prune              # Remove unused volumes
+
+-- System commands:
+
+docker info                      # Docker system information
+docker version                   # Docker version
+docker system df                 # Disk usage
+docker system prune              # Clean up unused data
+docker system prune -a           # Clean up everything
+
+-- Docker-Compose commands:
+
+docker-compose up               # Start services
+docker-compose up -d            # Start in detached mode
+docker-compose down             # Stop and remove services
+docker-compose ps               # List services
+docker-compose logs             # View logs
+docker-compose build            # Build images
+
+
+
+
+
+
+
+
